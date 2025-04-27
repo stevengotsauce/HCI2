@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CPSU Confession Wall</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <div class="container header-container">
+      <h1><i class="fas fa-comment-dots"></i> CPSU Confession Wall</h1>
+      <div class="header-actions">
+        <button id="dark-mode-toggle" aria-label="Toggle Dark Mode">
+          <i class="fas fa-moon"></i>
+        </button>
+        <button id="login-btn" class="primary-btn">
+          <i class="fas fa-sign-in-alt"></i> Sign In
+        </button>
+        <button id="logout-btn" class="primary-btn" style="display: none;">
+          <i class="fas fa-sign-out-alt"></i> Logout
+        </button>
+        <a href="profile.html" id="profile-btn" class="primary-btn" style="display: none;">
+          <i class="fas fa-user-cog"></i> Profile
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <div class="hero-section">
+    <div class="hero-overlay"></div>
+    <div class="container hero-container">
+      <div class="hero-content">
+        <h1 class="hero-title">Share Your Voice <span class="accent-text">Anonymously</span></h1>
+        <p class="hero-subtitle">Express yourself freely in a safe space created for Cenphilians across all campuses</p>
+        <div class="hero-cta">
+          <button id="hero-post-btn" class="hero-btn">
+            <i class="fas fa-pen"></i> Create Confession
+          </button>
+          <button id="hero-browse-btn" class="hero-btn secondary">
+            <i class="fas fa-book-open"></i> Browse Confessions
+          </button>
+        </div>
+      </div>
+      <div class="hero-image">
+        <div class="confession-bubbles">
+          <div class="bubble b1">
+            <i class="fas fa-heart"></i>
+            <span>Crushes</span>
+          </div>
+          <div class="bubble b2">
+            <i class="fas fa-graduation-cap"></i>
+            <span>School Life</span>
+          </div>
+          <div class="bubble b3">
+            <i class="fas fa-comment-dots"></i>
+            <span>Thoughts</span>
+          </div>
+          <div class="bubble b4">
+            <i class="fas fa-laugh"></i>
+            <span>Funny</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats-section">
+    <div class="container">
+      <div class="stats-container">
+        <div class="stat-item">
+          <div class="stat-icon"><i class="fas fa-comment"></i></div>
+          <div class="stat-number" data-count="5280">0</div>
+          <div class="stat-label">Confessions Shared</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-icon"><i class="fas fa-users"></i></div>
+          <div class="stat-number" data-count="1450">0</div>
+          <div class="stat-label">Active Users</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-icon"><i class="fas fa-university"></i></div>
+          <div class="stat-number" data-count="9">0</div>
+          <div class="stat-label">Campuses</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-icon"><i class="fas fa-reply"></i></div>
+          <div class="stat-number" data-count="14320">0</div>
+          <div class="stat-label">Comments</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main class="container">
+    <section class="welcome-section">
+      <div class="welcome-card">
+        <div class="filter-section">
+          <label for="campus-filter">
+            <i class="fas fa-filter"></i> Filter by Campus:
+          </label>
+          <select id="campus-filter" class="select-styled">
+            <option value="all">All Campuses</option>
+            <option value="CPSU-Main">CPSU-Main</option>
+            <option value="CPSU-San Carlos">CPSU-San Carlos</option>
+            <option value="CPSU-Victorias">CPSU-Victorias</option>
+            <option value="CPSU-Moises Padilla">CPSU-Moises Padilla</option>
+            <option value="CPSU-Sipalay">CPSU-Sipalay</option>
+            <option value="CPSU-Hinigaran">CPSU-Hinigaran</option>
+            <option value="CPSU-Hinoba-an">CPSU-Hinoba-an</option>
+            <option value="CPSU-Cauayan">CPSU-Cauayan</option>
+            <option value="CPSU-Candoni">CPSU-Candoni</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <div class="grid-layout">
+      <div class="main-content">
+        <!-- Trending Confessions -->
+        <section id="trending" class="trending-section">
+          <div class="section-header">
+            <h2><i class="fas fa-fire"></i> Trending Confessions</h2>
+          </div>
+          <div id="trending-feed" class="feed-container"></div>
+        </section>
+
+        <!-- Daily Highlights -->
+        <section id="daily-highlights" class="highlights-section">
+          <div class="section-header">
+            <h2><i class="fas fa-calendar-day"></i> Daily Highlights</h2>
+          </div>
+          <div id="highlights-feed" class="feed-container"></div>
+        </section>
+
+        <!-- Main Feed with Search Bar -->
+        <section class="feed-section">
+          <div class="section-header-with-search">
+            <div class="section-title">
+              <h2><i class="fas fa-stream"></i> Recent Confessions</h2>
+            </div>
+            <div class="section-search">
+              <div class="search-bar">
+                <input type="text" 
+                     id="confession-search" 
+                     class="search-input" 
+                     placeholder="Search confessions...">
+                <i class="fas fa-search search-icon"></i>
+              </div>
+            </div>
+          </div>
+          
+          <div id="confession-feed" class="feed-container"></div>
+        </section>
+      </div>
+
+      <aside class="sidebar">
+        <!-- Leaderboard -->
+        <section id="leaderboard" class="leaderboard-section">
+          <div class="section-header">
+            <h2><i class="fas fa-trophy"></i> Most Active Campuses</h2>
+          </div>
+          <div id="leaderboard-list" class="leaderboard-container"></div>
+        </section>
+        
+        <div class="campus-highlights">
+          <h3><i class="fas fa-star"></i> Campus Spotlight</h3>
+          <div class="campus-spotlight">
+            <div class="spotlight-campus">CPSU-Main</div>
+            <p class="spotlight-description">Leading in academic confessions this week!</p>
+          </div>
+        </div>
+        
+        <div class="sidebar-info">
+          <h3>About CPSU Confessions</h3>
+          <p>This is a safe space to share your thoughts, feelings, and experiences anonymously with fellow Cenphilians.</p>
+          <p>Remember to be respectful and follow community guidelines.</p>
+          <div class="tags-cloud">
+            <span class="tag">❤️ Love</span>
+            <span class="tag">🎓 School Life</span>
+            <span class="tag">🤬 Rant</span>
+            <span class="tag">😂 Funny</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <!-- Floating Post Button (positioned above footer) -->
+  <button id="post-btn" class="floating-btn-option2">
+    <div class="icon-section">
+      <i class="fas fa-pen"></i>
+    </div>
+    <div class="text-section">
+      <span>Post Confession</span>
+      <i class="fas fa-arrow-right"></i>
+    </div>
+  </button>
+
+  <!-- Post Modal -->
+  <div id="post-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2><i class="fas fa-pen"></i> Post a Confession</h2>
+        <span id="close-modal" class="close"><i class="fas fa-times"></i></span>
+      </div>
+      
+      <div class="modal-body">
+        <div class="form-group">
+          <div class="formatting-help">
+            <span><code>**text**</code> for bold</span>
+            <span><code>*text*</code> for italic</span>
+            <span><code>Enter</code> for new line</span>
+          </div>
+          <label for="confession-text">Your Confession:</label>
+          <textarea id="confession-text" maxlength="500" placeholder="Share your thoughts (max 500 characters)"></textarea>
+          <div class="char-counter"><span id="char-count">0</span>/500 characters</div>
+        </div>
+        
+        <div class="form-group">
+          <label for="campus-select"><i class="fas fa-university"></i> Campus:</label>
+          <select id="campus-select" class="select-styled">
+            <option value="all">All Campuses</option>
+            <option value="CPSU-Main">CPSU-Main</option>
+            <option value="CPSU-San Carlos">CPSU-San Carlos</option>
+            <option value="CPSU-Victorias">CPSU-Victorias</option>
+            <option value="CPSU-Moises Padilla">CPSU-Moises Padilla</option>
+            <option value="CPSU-Sipalay">CPSU-Sipalay</option>
+            <option value="CPSU-Hinigaran">CPSU-Hinigaran</option>
+            <option value="CPSU-Hinoba-an">CPSU-Hinoba-an</option>
+            <option value="CPSU-Cauayan">CPSU-Cauayan</option>
+            <option value="CPSU-Candoni">CPSU-Candoni</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="tag-select"><i class="fas fa-tag"></i> Tag (optional):</label>
+          <select id="tag-select" class="select-styled">
+            <option value="">None</option>
+            <option value="❤️ Love">❤️ Love</option>
+            <option value="🎓 School Life">🎓 School Life</option>
+            <option value="🤬 Rant">🤬 Rant</option>
+            <option value="😂 Funny">😂 Funny</option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="modal-footer">
+        <button id="submit-confession" class="primary-btn">
+          <i class="fas fa-paper-plane"></i> Submit Confession
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-logo">
+          <h3><i class="fas fa-comment-dots"></i> CPSU Confession Wall</h3>
+          <p>Your anonymous voice at Central Philippine State University</p>
+        </div>
+        <div class="footer-links">
+          <div class="footer-column">
+            <h4>Quick Links</h4>
+            <ul>
+              <li><a href="#trending">Trending</a></li>
+              <li><a href="#daily-highlights">Daily Highlights</a></li>
+              <li><a href="#leaderboard">Leaderboard</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h4>Campuses</h4>
+            <ul>
+              <li><a href="#">CPSU-Main</a></li>
+              <li><a href="#">CPSU-San Carlos</a></li>
+              <li><a href="#">All Campuses</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h4>Legal</h4>
+            <ul>
+              <li><a href="#">Terms of Use</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Community Guidelines</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 CPSU Confession Wall | Made with <i class="fas fa-heart"></i> for Cenphilians</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="auth.js"></script>
+  <script src="script.js"></script>
+  <script>
+    // Animation for stats counter
+    document.addEventListener('DOMContentLoaded', function() {
+      // Stats counter animation
+      function animateStats() {
+        const stats = document.querySelectorAll('.stat-number');
+        const speed = 200; // Lower = faster
+
+        stats.forEach(stat => {
+          const target = parseInt(stat.getAttribute('data-count'));
+          const count = +stat.innerText;
+          
+          const inc = target / speed;
+          
+          if (count < target) {
+            stat.innerText = Math.ceil(count + inc);
+            setTimeout(() => animateStats(), 1);
+          } else {
+            stat.innerText = target.toLocaleString();
+          }
+        });
+      }
+
+      // Start animation when section comes into view
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            animateStats();
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.5 });
+
+      const statsSection = document.querySelector('.stats-section');
+      if (statsSection) {
+        observer.observe(statsSection);
+      }
+
+      // Hero button event listeners
+      document.getElementById('hero-post-btn').addEventListener('click', function() {
+        document.getElementById('post-btn').click();
+      });
+
+      document.getElementById('hero-browse-btn').addEventListener('click', function() {
+        document.querySelector('#trending').scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  </script>
+</body>
+</html>
